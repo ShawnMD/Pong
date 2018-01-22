@@ -18,7 +18,6 @@ public class Game extends JFrame {
 
         setFocusable(true);
         setTitle("PONG");
-        board = new Board();
 
         add(board);
 

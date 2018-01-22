@@ -7,5 +7,4 @@ public class Board extends JPanel{
         setPreferredSize(new Dimension(800, 600));
         setBackground(Color.BLACK);
     }
-    
 }
