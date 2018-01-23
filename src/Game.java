@@ -19,6 +19,9 @@ public class Game extends JFrame {
         setFocusable(true);
         //sets the text in the title bar of the frame
         setTitle("PONG");
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        //creates an instance of the Board class
+        board = new Board();
         //adds the board panel to the frame
         add(board);
         //packages all components and determines best layout/size
