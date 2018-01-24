@@ -1,3 +1,8 @@
+/* NOTES FOR STUDENTS:
+        Nothing too fancy here, but notice how everything is STATIC. This will allow us to use this class and
+        all its methods without needing to create an instance of this class.
+ */
+
 public class GAMESTATES {
 
     private static boolean isPlay = false;
@@ -25,6 +30,13 @@ public class GAMESTATES {
 
     public static void increasePScore(){
         pScore++;
+    }
+
+    public static void setCScore(int a){
+        cScore = a;
+    }
+    public static void setPScore(int a){
+        pScore = a;
     }
 
     /* GETTERS AND SETTERS FOR THE GAME CONTROLLERS
