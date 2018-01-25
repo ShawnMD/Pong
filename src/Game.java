@@ -28,6 +28,7 @@ public class Game extends JFrame {
         pack();
         //centers the frame on the screen
         setLocationRelativeTo(null);
+        board.GameStart();
     }
 
     public static void main(String[] args){
