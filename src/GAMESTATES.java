@@ -5,9 +5,9 @@
 
 public class GAMESTATES {
 
-    private static boolean isPlay = false;
+    private static boolean isPlay = true;
     private static boolean isPause = false;
-    private static boolean isMenu = true;
+    private static boolean isMenu = false;
     private static boolean isEnd = false;
     private static int cScore = 0;
     private static int pScore = 0;
