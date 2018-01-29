@@ -1,13 +1,16 @@
 import javax.swing.*;
 import javax.swing.text.EditorKit;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Board extends JPanel{
+public class Board extends JPanel implements ActionListener{
     //assigns the Ball data type to a variable ball
     Ball ball;
     //assigns the Paddle data type to a player and computer variable
     Paddle pPaddle;
     Paddle cPaddle;
+    Timer timer;
     //variables used to determine how far to render graphics from the border of the panel
     private final int EDGESPACE = 50;
     //variables used to determine sizes for board decorations
@@ -19,7 +22,7 @@ public class Board extends JPanel{
         //sets the background color of the panel
         setBackground(Color.BLACK);
         //creates a new instance of the Ball class
-        ball = new Ball();
+        ball = new Ball(this);
         pPaddle = new Paddle();
         cPaddle = new Paddle();
     }
@@ -29,6 +32,16 @@ public class Board extends JPanel{
         ball.setPosition(getWidth()/2, getHeight()/2);
         pPaddle.setPosition(EDGESPACE, getHeight()/2);
         cPaddle.setPosition(getWidth() - EDGESPACE, getHeight()/2);
+        timer = new Timer(1000 / 60, this);
+        timer.start();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        ball.move();
+        repaint();
+
     }
 
     //Overrides JPanel's default paintComponent with our custom one
@@ -87,4 +100,6 @@ public class Board extends JPanel{
         //prints s at the desired X position with adjustment and the desired y.
         g2d.drawString(s, start + XPos, YPos);
     }
+
+
 }
