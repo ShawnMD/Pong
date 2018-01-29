@@ -1,13 +1,17 @@
 import java.awt.*;
 
 public class Ball {
-    //defines variables for the POSITION of the ball
-    int x, y, dx = 3, dy = 3;
     //defines a variable for the WIDTH/HEIGHT of the ball. Since WIDTH = HEIGHT we will use diameter
     final int diameter = 50;
+    //defines a constant for the ball's speed
+    final int SPEED = 3;
+    //defines variables for the POSITION of the ball
+    int x, y, dx = SPEED, dy = SPEED;
+
     Board board;
 
     //ball constructor to set initial position values
+    //passes in a parameter to access a board object
     public Ball(Board board){
         this.board = board;
         x = 0;
@@ -15,10 +19,14 @@ public class Ball {
     }
 
     public void move(){
-
-        if(y+diameter > board.getHeight())
+        //ball bounces off bottom and right
+        if(y+diameter > board.getHeight()|| y < 0)
             dy*=-1;
+        //ball bounces off top and left
+        if(x+diameter > board.getWidth()|| x < 0)
+            dx*=-1;
 
+        //updates x and y based on velocity
         x += dx;
         y += dy;
 

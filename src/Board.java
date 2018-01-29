@@ -21,7 +21,8 @@ public class Board extends JPanel implements ActionListener{
         setPreferredSize(new Dimension(800, 600));
         //sets the background color of the panel
         setBackground(Color.BLACK);
-        //creates a new instance of the Ball class
+        //creates a new instance of the Ball class and passes in the current instance of the
+        //board class
         ball = new Ball(this);
         pPaddle = new Paddle();
         cPaddle = new Paddle();
@@ -32,14 +33,17 @@ public class Board extends JPanel implements ActionListener{
         ball.setPosition(getWidth()/2, getHeight()/2);
         pPaddle.setPosition(EDGESPACE, getHeight()/2);
         cPaddle.setPosition(getWidth() - EDGESPACE, getHeight()/2);
+        //creates a timer to control rendering graphics and game updates
         timer = new Timer(1000 / 60, this);
         timer.start();
     }
-
+    //method called in the ActionListener which controls the game updates/rendering
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        //updates the ball's position
         ball.move();
+        //refreshes the panel to render the objects with their new positions
         repaint();
 
     }
