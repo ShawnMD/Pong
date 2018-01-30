@@ -40,6 +40,18 @@ public class Ball {
         this.y = y - diameter/2;
     }
 
+    public int getX(){
+        return x;
+    }
+
+    public int getY(){
+        return y;
+    }
+
+    public int getDiam(){
+        return diameter;
+    }
+
     //paint method to render the ball graphics
     public void paint(Graphics g){
         g.fillOval(x, y, diameter, diameter);

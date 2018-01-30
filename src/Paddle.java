@@ -5,11 +5,48 @@ public class Paddle {
     private int x, y;
     //variable to determine the size of the paddle
     private final int WIDTH = 20, HEIGHT = 100;
+    //creates local variables for the board, game and ball instances
+    Board board;
+    Game game;
+    Ball ball;
 
-    public Paddle(){
+    //constructor which takes as parameters the current instances of board, game and ball
+    public Paddle(Board board, Game game, Ball ball){
         //initial coordinates of the paddle
         x = 0;
         y = 0;
+        //reference the current instances of the objects and assigns it to local variable
+        this.board = board;
+        this.game = game;
+        this.ball = ball;
+    }
+    public void move(){
+        //if the up key is pressed move paddle up
+        if(game.isUpPressed()){
+            if(y > 0){
+                y -= 5;
+            }
+        }
+        //if the down key is pressed move the paddle down
+        if(game.isDownPressed()){
+            if(y + HEIGHT < board.getHeight()){
+                y += 5;
+            }
+        }
+    }
+    //CREATES AI MOVEMENT
+    public void moveAI(){
+        //start moving once the ball crosses halfway point
+        if(ball.getX()+ ball.getDiam() > board.getWidth()/2){
+            //if the ball is above the center of the paddle
+            if(ball.getY() > y + HEIGHT/2){
+                y += 1;
+            }
+            //if the ball is below the center of the paddle
+            if(ball.getY() < y + HEIGHT/2){
+                y -= 1;
+            }
+        }
     }
 
     public void setPosition(int x, int y){

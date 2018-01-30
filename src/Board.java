@@ -11,12 +11,13 @@ public class Board extends JPanel implements ActionListener{
     Paddle pPaddle;
     Paddle cPaddle;
     Timer timer;
+    Game game;
     //variables used to determine how far to render graphics from the border of the panel
     private final int EDGESPACE = 50;
     //variables used to determine sizes for board decorations
     private final int DECORSIZE = 25;
 
-    public Board() {
+    public Board(Game game) {
         //sets the size JFrame.pack should use if its optimal
         setPreferredSize(new Dimension(800, 600));
         //sets the background color of the panel
@@ -24,8 +25,8 @@ public class Board extends JPanel implements ActionListener{
         //creates a new instance of the Ball class and passes in the current instance of the
         //board class
         ball = new Ball(this);
-        pPaddle = new Paddle();
-        cPaddle = new Paddle();
+        pPaddle = new Paddle(this, game, ball );
+        cPaddle = new Paddle(this, game, ball );
     }
     //method to initialize the game
     public void GameStart(){
@@ -41,8 +42,10 @@ public class Board extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        //updates the ball's position
+        //updates the objects position
         ball.move();
+        pPaddle.move();
+        cPaddle.moveAI();
         //refreshes the panel to render the objects with their new positions
         repaint();
 
@@ -72,6 +75,10 @@ public class Board extends JPanel implements ActionListener{
             for(int i = 0; i < numDashes; i++){
                 g.drawLine(getWidth()/2, (i*DECORSIZE+DECORSIZE/4), getWidth()/2, (i*DECORSIZE)+(int)(DECORSIZE*(3.0/4)));
             }
+            //Print the score on the board
+            g.setFont(new Font("Serif", Font.BOLD, 72));
+            printSimpleString(GAMESTATES.getpScore().toString(), getWidth()/2, 0, DECORSIZE*2, g);
+            printSimpleString(GAMESTATES.getcScore().toString(), getWidth()/2, getWidth()/2, DECORSIZE*2, g);
         }
         else if(GAMESTATES.isMenu()){
             //Renders the Menu Board

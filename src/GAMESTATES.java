@@ -9,18 +9,17 @@ public class GAMESTATES {
     private static boolean isPause = false;
     private static boolean isMenu = false;
     private static boolean isEnd = false;
-    private static int cScore = 0;
-    private static int pScore = 0;
+    private static Integer cScore = new Integer(0);
+    private static Integer pScore = new Integer(0);
 
     /*
      *METHODS FOR SETTING AND RETURNING THE SCORES
      * FOR COMPUTER AND PLAYER
      */
-    public static int getcScore(){
-        return cScore;
+    public static Integer getcScore() {return cScore;
     }
 
-    public static int getpScore(){
+    public static Integer getpScore(){
         return pScore;
     }
 
