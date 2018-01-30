@@ -11,7 +11,6 @@ public class Board extends JPanel implements ActionListener{
     Paddle pPaddle;
     Paddle cPaddle;
     Timer timer;
-    Game game;
     //variables used to determine how far to render graphics from the border of the panel
     private final int EDGESPACE = 50;
     //variables used to determine sizes for board decorations
