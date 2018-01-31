@@ -34,17 +34,22 @@ public class Paddle {
             }
         }
     }
+
+    public Rectangle getBounds(){
+        return new Rectangle(x , y, WIDTH, HEIGHT);
+    }
+
     //CREATES AI MOVEMENT
     public void moveAI(){
         //start moving once the ball crosses halfway point
         if(ball.getX()+ ball.getDiam() > board.getWidth()/2){
             //if the ball is above the center of the paddle
             if(ball.getY() > y + HEIGHT/2){
-                y += 1;
+                y += 3;
             }
             //if the ball is below the center of the paddle
             if(ball.getY() < y + HEIGHT/2){
-                y -= 1;
+                y -= 3;
             }
         }
     }

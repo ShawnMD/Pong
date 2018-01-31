@@ -37,14 +37,35 @@ public class Board extends JPanel implements ActionListener{
         timer = new Timer(1000 / 60, this);
         timer.start();
     }
+
+    public void gameReset(){
+        ball.setPosition(getWidth()/2, getHeight()/2);
+        pPaddle.setPosition(EDGESPACE, getHeight()/2);
+        cPaddle.setPosition(getWidth() - EDGESPACE, getHeight()/2);
+    }
+
+    public void gameRestart(){
+        gameReset();
+        GAMESTATES.setCScore(0);
+        GAMESTATES.setPScore(0);
+    }
+
     //method called in the ActionListener which controls the game updates/rendering
     @Override
     public void actionPerformed(ActionEvent e) {
 
         //updates the objects position
-        ball.move();
+        ball.move(cPaddle);
+        //ball.move(cPaddle);
         pPaddle.move();
         cPaddle.moveAI();
+
+        //checks whether the ball has collided with paddles
+        ball.checkCollisions(pPaddle);
+        ball.checkCollisions(cPaddle);
+
+        if(GAMESTATES.getcScore() > 9 || GAMESTATES.getpScore() > 9)
+            gameRestart();
         //refreshes the panel to render the objects with their new positions
         repaint();
 
@@ -99,6 +120,9 @@ public class Board extends JPanel implements ActionListener{
             printSimpleString("Press *SPACE* to begin again.", getWidth(), 0, (int)(getHeight()*(2.0/3)), g);
         }
 
+    }
+    public int getEDGESPACE(){
+        return EDGESPACE;
     }
 
     private void printSimpleString(String s, int width, int XPos, int YPos, Graphics g2d){
