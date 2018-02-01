@@ -46,8 +46,7 @@ public class Ball {
     public void checkCollisions(Paddle other){
 
         if(getBounds().intersects(other.getBounds())){
-            dy *= -1;
-
+            dx *= -1;
         }
     }
 
