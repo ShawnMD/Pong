@@ -1,15 +1,14 @@
 import java.awt.*;
 
+
+
 public class Ball {
     //defines a variable for the WIDTH/HEIGHT of the ball. Since WIDTH = HEIGHT we will use diameter
-    final int diameter = 50;
+    final int diameter = 20;
     //defines a constant for the ball's speed
     final int SPEED = 3;
     //defines variables for the POSITION of the ball
-    int x, y;
-    double dx = SPEED, dy = SPEED;
-
-    double MAXANGLE = 5*Math.PI/12;
+    int x, y, dx = SPEED, dy = SPEED;
 
     Board board;
 
@@ -22,10 +21,10 @@ public class Ball {
     }
 
     public void move(Paddle other){
-        //ball bounces off bottom and top
+        //ball bounces off bottom and right
         if(y+diameter > board.getHeight()|| y < 0)
             dy*=-1;
-        //ball bounces off right and left
+        //ball bounces off top and left
         if(x + diameter > board.getWidth() - board.getEDGESPACE()){
             GAMESTATES.increasePScore();
             board.gameReset();
@@ -46,8 +45,7 @@ public class Ball {
     public void checkCollisions(Paddle other){
 
         if(getBounds().intersects(other.getBounds())){
-            dy *= -1;
-
+            dx*= -1;
         }
     }
 
