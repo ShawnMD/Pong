@@ -54,18 +54,24 @@ public class Board extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        //updates the objects position
-        ball.move(cPaddle);
-        //ball.move(cPaddle);
-        pPaddle.move();
-        cPaddle.moveAI();
+        if(GAMESTATES.isPlay()) {
+            //updates the objects position
+            ball.move(cPaddle);
+            //ball.move(cPaddle);
+            pPaddle.move();
+            cPaddle.moveAI();
+        }
 
         //checks whether the ball has collided with paddles
         ball.checkCollisions(pPaddle);
         ball.checkCollisions(cPaddle);
 
-        if(GAMESTATES.getcScore() > 9 || GAMESTATES.getpScore() > 9)
+        if(GAMESTATES.getcScore() > 9 || GAMESTATES.getpScore() > 9) {
             gameRestart();
+            GAMESTATES.endGame();
+            GAMESTATES.stopPlay();
+            GAMESTATES.stopPause();
+        }
         //refreshes the panel to render the objects with their new positions
         repaint();
 
@@ -115,8 +121,13 @@ public class Board extends JPanel implements ActionListener{
         }
         else if(GAMESTATES.isEnd()){
             //Renders the End Game Screen
+
             g.setFont(new Font("Serif", Font.BOLD, 36));
-            printSimpleString("GAME OVER", getWidth(), 0, (int)getHeight()/3, g);
+            if(GAMESTATES.getpScore() > 9){
+                printSimpleString("YOU WON!!", getWidth(), 0, (int)getHeight()/3, g);
+            }else
+                printSimpleString("YOU LOST :(", getWidth(), 0, (int)getHeight()/3, g);
+
             printSimpleString("Press *SPACE* to begin again.", getWidth(), 0, (int)(getHeight()*(2.0/3)), g);
         }
 
