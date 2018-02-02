@@ -47,6 +47,21 @@ public class Game extends JFrame implements KeyListener{
     }
     @Override
     public void keyPressed(KeyEvent e) {
+
+        if(e.getKeyCode() == KeyEvent.VK_SPACE){
+            GAMESTATES.startPlay();
+            GAMESTATES.stopMenu();
+        }
+        if(e.getKeyCode() == KeyEvent.VK_P){
+            GAMESTATES.togglePause();
+            GAMESTATES.togglePlay();
+        }
+        if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
+            GAMESTATES.stopPlay();
+            GAMESTATES.stopPause();
+            GAMESTATES.startMenu();
+            board.gameRestart();
+        }
         if(e.getKeyCode() == KeyEvent.VK_UP){
             upPressed = true;
         }

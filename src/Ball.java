@@ -9,7 +9,7 @@ public class Ball {
     int x, y;
     double dx = SPEED, dy = SPEED;
 
-    double MAXANGLE = 5*Math.PI/12;
+    double MAXANGLE = 5*Math.PI/12; //70 degrees
 
     Board board;
 
@@ -46,7 +46,29 @@ public class Ball {
     public void checkCollisions(Paddle other){
 
         if(getBounds().intersects(other.getBounds())){
-            dx *= -1;
+           double paddleY = other.getBounds().getY();
+           double paddleC = other.getBounds().getHeight()/2;
+           double bally = y;
+
+           double relativeIntersect = (paddleY + paddleC) - bally;
+           double normalIntersect = relativeIntersect/paddleC;
+           double bounceAngle = MAXANGLE * normalIntersect;
+
+           if(y+(diameter/2) < paddleY)
+               bally = y + diameter;
+           else if(y + diameter/2 > paddleY + other.getBounds().getHeight())
+               bally = y;
+           else
+               bally = y + diameter/2;
+
+           if(x < board.getWidth()/2){
+               dx = (int)(SPEED*Math.cos(bounceAngle));
+           }
+           if(x > board.getWidth()/2){
+               dx = (int)(SPEED*-Math.cos(bounceAngle));
+           }
+           dy = (int)(SPEED*-Math.sin(bounceAngle));
+
         }
     }
 
