@@ -54,6 +54,13 @@ public class Ball {
            double normalIntersect = relativeIntersect/paddleC;
            double bounceAngle = MAXANGLE * normalIntersect;
 
+           if(y+(diameter/2) < paddleY)
+               bally = y + diameter;
+           else if(y + diameter/2 > paddleY + other.getBounds().getHeight())
+               bally = y;
+           else
+               bally = y + diameter/2;
+
            if(x < board.getWidth()/2){
                dx = (int)(SPEED*Math.cos(bounceAngle));
            }
